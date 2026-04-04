@@ -23,18 +23,19 @@ Repeat
 ## I Ask You When
 
 - **Design forks:** "Option A (fast) vs. Option B (robust). Which?"
-- **Code ambiguity:** "Spec unclear on X. Assume Y?"
-- **Replication edge case:** "Just missed tolerance. Investigate?"
+- **Identification ambiguity:** "Spec unclear on assumption direction. Assume Y?"
+- **Notation conflict:** "New symbol overlaps existing one. Resolve?"
 - **Scope question:** "Also refactor Y while here, or focus on X?"
+- **MC near-miss:** "Coverage is 0.933 vs target 0.95. Investigate or proceed?"
 
 ---
 
 ## I Just Execute When
 
 - Code fix is obvious (bug, pattern application)
-- Verification (tolerance checks, tests, compilation)
-- Documentation (logs, commits)
-- Plotting (per established standards)
+- Verification (tolerance checks, compilation, coverage checks)
+- Documentation (logs, commits, bib entries)
+- Plotting (per established figure standards)
 - Deployment (after you approve, I ship automatically)
 
 ---
@@ -48,32 +49,30 @@ Repeat
 
 ---
 
-## Non-Negotiables (Customize These)
+## Non-Negotiables
 
-<!-- Replace with YOUR project's locked-in preferences -->
-
-- [YOUR PATH CONVENTION] (e.g., `here::here()` for R, relative paths for LaTeX)
-- [YOUR SEED CONVENTION] (e.g., `set.seed()` once at top for stochastic code)
-- [YOUR FIGURE STANDARDS] (e.g., white bg, 300 DPI, custom theme)
-- [YOUR COLOR PALETTE] (e.g., institutional colors)
-- [YOUR TOLERANCE THRESHOLDS] (e.g., 1e-6 for point estimates)
+- **Path convention:** `here::here()` for all R scripts; relative paths for LaTeX
+- **Seed convention:** `set.seed(YYYYMMDD)` once at top of each script; document seed value in comment
+- **Figure standards:** Transparent background; minimum 6×4 inches; publication-ready minimal theme; no ggplot default colors or grids
+- **Color palette:** Muted academic palette — colorblind-safe (see `r-code-conventions.md`); never bright defaults
+- **MC tolerance thresholds:** Point estimates ≤1e-6; SE (analytical) ≤1e-6; SE (bootstrap) ≤1e-4; coverage rates ±0.01 (B=5000)
+- **No inline heavy computation:** All MC outputs and estimated objects saved as `.rds`; plotting scripts load pre-computed data only
+- **Notation lock:** Symbol choices from `.claude/rules/knowledge-base-template.md` are frozen; ask before introducing any new notation symbol
 
 ---
 
 ## Preferences
 
-<!-- Fill in as you discover your working style -->
-
-**Visual:** [How you want figures/plots handled]
-**Reporting:** [Concise bullets? Detailed prose? Details on request?]
+**Visual:** Publication-ready minimal ggplot theme; math-mode axis labels; no chart junk; no redundant legends
+**Reporting:** Concise bullets first; details on request; always flag MC near-misses explicitly
 **Session logs:** Always (post-plan, incremental, end-of-session)
-**Replication:** [How strict? Flag near-misses?]
+**Replication:** Replicate original CiC results to 1e-6 before extending; document any discrepancy even if unresolved
 
 ---
 
 ## Exploration Mode
 
-For experimental work, use the **Fast-Track** workflow:
+For experimental work (testing identification strategies, new estimators), use the **Fast-Track** workflow:
 - Work in `explorations/` folder
 - 60/100 quality threshold (vs. 80/100 for production)
 - No plan needed — just a research value check (2 min)

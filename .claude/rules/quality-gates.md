@@ -1,5 +1,6 @@
 ---
 paths:
+  - "Paper/**/*.tex"
   - "Slides/**/*.tex"
   - "Quarto/**/*.qmd"
   - "scripts/**/*.R"
@@ -58,10 +59,11 @@ Save to `quality_reports/merges/YYYY-MM-DD_[branch-name].md`.
 
 ## Tolerance Thresholds (Research)
 
-<!-- Customize for your domain -->
-
 | Quantity | Tolerance | Rationale |
 |----------|-----------|-----------|
-| Point estimates | [e.g., 1e-6] | [Numerical precision] |
-| Standard errors | [e.g., 1e-4] | [MC variability] |
-| Coverage rates | [e.g., +/- 0.01] | [MC with B reps] |
+| Point estimates (analytical) | ≤ 1e-6 | Numerical precision — exact formula match |
+| Standard errors (analytical) | ≤ 1e-6 | Numerical precision — exact formula match |
+| Standard errors (bootstrap) | ≤ 1e-4 | MC variability across bootstrap replications |
+| Coverage rates (B=5000 reps) | ± 0.01 | MC sampling noise at B=5000 |
+| CDF values | ≤ 1e-6 | Numerical precision in CDF estimation |
+| Quantile estimates | ≤ 1e-4 | Inversion tolerance (smooth CDF estimators) |
