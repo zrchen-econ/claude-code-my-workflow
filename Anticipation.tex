@@ -1,0 +1,124 @@
+\documentclass[aspectratio=1610, 9pt]{beamer}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{\hspace{1em}\inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par}
+
+\linespread{1.3}
+\usetheme{default}
+
+\usepackage{mathpazo}
+\renewcommand{\familydefault}{\rmdefault}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts} 
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{tikz}
+\usepackage[normalem]{ulem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{dsfont}
+\usepackage{natbib}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{threeparttable}
+\usepackage{booktabs}
+\usepackage{multirow}
+\newcommand{\sym}[1]{\ifmmode^{#1}\else\(^{#1}\)\fi}
+
+\bibliographystyle{apalike}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
+}
+\setbeamersize{text margin left=0.8cm, text margin right = 5mm}
+\newtheorem{assumption}{Assumption}
+
+% \setbeamertemplate{theorems}[numbered]
+% \setbeamertemplate{footline}[frame number]
+
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+
+
+\title[Chen 2025]{Anticipation Effects in Difference-in-Differences Design}
+
+\author{Kyunghoon Ban, Zhengrun Chen, D\'esir\'e K\'edagni}
+
+
+
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Introduction}
+\begin{itemize}
+    \item The Difference-in-Differences (DID) relies on two main assumptions
+         \begin{itemize}
+     \item[-] Parallel Trends (PT)
+     \item[-] No Anticipation Effects (No-AE), often imposed implicitly
+     \end{itemize}
+     
+    \item People are forward-looking, e.g. 
+     \begin{itemize}
+     \item[-] Healthcare utilization decreases before Medicaid expansion (Alpert, 2016)
+     \item[-] Physician labor supply increases before tort reform (Malani \& Reif, 2015)
+     \end{itemize}
+     \item Common practice: drop a few pre-treatment periods potentially affected by anticipation. 
+     \begin{itemize}
+         \item We don’t always know when people start to change behavior in anticipation of a policy.
+         \item Different people/groups may react at different times.
+     \end{itemize}
+    \item Goal: Identify the ATT while allowing for violations of the No-AE assumption
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Identification}
+\begin{itemize}
+    \item Under the Parallel Trend, the standard DID estimand identifies the ATT net of the AE:
+     $$\tau^{DID} = ATT-AE$$ where $AE\equiv\mathbb{E}[Y_0(1)-Y_0(0)\mid D=1]$
+     \item Propose a bounded-variation assumption (Manski and Pepper, 2018; Roth and Rambachan, 2023): for some $c\in [0,1)$, $|AE| \leq c\cdot|ATT|$ 
+     
+
+     \item With multiple pre-treatment periods, we further assume exponential c-bounded anticipation: \\for some $c \in [0,1)$, 
+        $|AE_{t_0}|\leq c^{|t_0|+1}\cdot |ATT|$ for all $t_0\in \{-T_0,...,-1,0\}$\\
+        (Motivated by the exponential discounting model in Malani and Reif (2015))
+
+        \item Interpretation:
+    \begin{itemize}
+        \item[-] Anticipation effects are bounded and decay over time
+        \item[-] Provides a flexible, nonparametric alternative to fully parametric models
+        \item[-] The choice of c can play the role of sensitivity analysis
+    \end{itemize}
+  
+\end{itemize} 
+
+\end{frame}
+
+
+\begin{frame}{Summary}
+\begin{itemize}
+    \item We derive bounds on the ATT that take the form of intersection-union bounds
+    \item We construct a misspecification robust bound for scenarios where researchers do not know whether the PT or No-AE assumption is the one failing.
+    \item We extend the framework to staggered adoption design
+    \item We illustrate the practical usefulness of these bounds through two applied empirical examples.
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+
+\end{document}
