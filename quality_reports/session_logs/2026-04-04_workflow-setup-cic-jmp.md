@@ -31,6 +31,31 @@
 
 ---
 
+---
+
+## Session Continuation: 2026-04-12 — Workflow Q&A + New Skill
+
+### Topics Discussed
+- How to use `/teach-paper`: drop PDFs in `master_supporting_docs/supporting_papers/`, invoke by filename
+- Taught **Graham & Powell (2012)** (CRC panel data, irregular identification, movers/stayers estimator) — full section-by-section walkthrough
+- `.tex` vs `.pdf` for reading: `.tex` is more token-efficient; use `.tex` for own work, PDF only for external papers without source
+- Explained skills vs. agents hierarchy: skills orchestrate agents; agents use tools
+- Explained `/proofread` skill vs. `proofreader` agent: skill is user-facing wrapper, agent is the specialist worker called internally
+- Assessed existing workflow: `slide-excellence` and `proofread` are lecture-oriented; `domain-reviewer` and `visual-audit` are general
+
+### New Skill Created
+- **`/slide-research-excellence [file]`** — research presentation review (job talk, seminar, conference)
+  - Runs: `slide-auditor` + `proofreader` + `domain-reviewer` + `tikz-reviewer` (parallel)
+  - Adds inline: research argument review (motivation, contribution clarity, narrative arc, claim precision, audience navigation)
+  - Drops: pedagogy review (irrelevant for expert audiences)
+  - Currently 159 lines — user flagged as potentially too long; trimming deferred
+
+### Design Decision
+- For research slides, prefer `/slide-research-excellence` over `/slide-excellence`
+- `/slide-excellence` remains for lecture slides only
+
+---
+
 ## Open Questions / Next Steps
 
 - [ ] Fill in `[YOUR INSTITUTION]` in CLAUDE.md
@@ -39,3 +64,8 @@
 - [ ] Decide: LaTeX theorem package (`amsthm` or `thmtools`?) for paper environments
 - [ ] Add Beamer custom environments in CLAUDE.md once presentation theme is chosen
 - [ ] Add Quarto CSS classes once slides are started
+
+
+---
+**Context compaction (manual) at 15:35**
+Check git log and quality_reports/plans/ for current state.

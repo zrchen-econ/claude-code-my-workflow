@@ -86,6 +86,7 @@ python scripts/quality_score.py Paper/main.tex
 | `/translate-to-quarto [file]` | Beamer → Quarto translation |
 | `/validate-bib` | Cross-reference citations |
 | `/review-paper [file]` | Manuscript review (argument, spec, referee objections) |
+| `/teach-paper [file]` | Read a paper and teach it section by section with plain-language explanations |
 | `/data-analysis [dataset]` | End-to-end R analysis |
 | `/lit-review [topic]` | Literature search + synthesis |
 | `/research-ideation [topic]` | Research questions + strategies |
@@ -94,6 +95,8 @@ python scripts/quality_score.py Paper/main.tex
 | `/learn [skill-name]` | Extract discovery into persistent skill |
 | `/context-status` | Show session health + context usage |
 | `/deep-audit` | Repository-wide consistency audit |
+| `/slide-excellence [file]` | Multi-agent slide review (visual, pedagogy, proofreading) — for lecture slides |
+| `/slide-research-excellence [file]` | Multi-agent review for research presentations (job talk, seminar, conference) |
 
 ---
 

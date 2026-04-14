@@ -1,0 +1,734 @@
+\documentclass[aspectratio=1610, 9pt]{beamer}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{\hspace{1em}\inserttocsectionnumber.\inserttocsubsectionnumber.~\inserttocsubsection\par}
+
+
+\linespread{1.35}
+\usetheme{default}
+\usepackage{mathpazo}
+\renewcommand{\familydefault}{\rmdefault}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts} 
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{tikz}
+\usepackage[normalem]{ulem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{threeparttable}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{dsfont}
+\usepackage{natbib}
+\usepackage{appendixnumberbeamer}
+
+\bibliographystyle{apalike}
+\usepackage{hyperref}
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor=black,
+%     urlcolor=blue,
+%     citecolor=blue,
+% }
+
+
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+% \setbeamerfont{itemize/enumerate subitem}{size=\normalsize}
+
+\setbeamersize{text margin left=0.8cm, text margin right = 5mm}
+\newtheorem{assumption}{Assumption}
+
+
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\sym}[1]{\ifmmode^{#1}\else\(^{#1}\)\fi}
+
+
+\title[Chen 2025]{Dissertation Proposal}
+
+\author{Zhengrun Chen}
+
+
+
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+
+\section{Changes-in-Changes with a Time Varying Treatment}
+
+\begin{frame}{Outline}
+    % \tableofcontents
+    \tableofcontents[sectionstyle=show/shaded]
+\end{frame}
+
+% \subsection*{Motivation}
+% \subsection*{Setup}
+% \subsection*{Identification}
+% \subsection*{Examples}
+% \subsection*{Estimation}
+% \subsection*{Simulation}
+
+\begin{frame}{Motivation}
+
+\begin{itemize}
+
+\item Changes-in-Changes (CiC) is a nonlinear extension of Difference-in-Differences (DiD) for evaluating the effects of policy interventions or treatments (Athey and Imbens, 2006)
+\vspace{0.02cm}
+\item CiC targets the counterfactual outcome distributions, not just average effects.
+\vspace{0.02cm}
+
+\item CiC is designed for \textbf{binary treatment}
+\vspace{0.02cm}
+\item Many empirical settings involve \textbf{continuous treatment}
+\vspace{0.02cm}
+\item \textbf{Example}: Marginal propensity to consume (MPC) \\
+  Changes in disposable income\ $\to$\ Non-durable consumption
+  \vspace{0.02cm}
+  \item \textbf{ Question}: Can we extend CiC to settings with continuous treatment?
+
+
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Motivation}
+    \begin{itemize}
+        \item D’Haultfoeuille, Hoderlein, and Sasaki (2023) extend Changes-in-Changes to continuous treatment in repeated cross section data
+   \vspace{0.1cm}
+   \item Limitation: Only certain treatment effects on the treated are identified \\
+       E.g., for individuals with treatment $d$, the effects of moving from $d$ to a specific $d^\prime$ identified
+
+         \vspace{0.1cm}
+    
+    \item Similar issues arise in panel data literature, e.g., Chernozhukov et al. (2013)
+     \vspace{0.1cm}
+
+\item Possible solutions:\\
+     (1) Shape restrictions + three periods $\rightarrow$ partial identification\\
+   (2) Linear random coefficient model $\rightarrow$  identification of average treatment effects only
+   
+ \vspace{0.1cm}
+        \item   \textbf{Goal of this paper}: To point identify richer treatment effects with only two periods.
+    \end{itemize}
+\end{frame}
+
+  % \begin{itemize} \setlength{\leftskip}{-1.2em}
+   %       \item[--] Limitation: Only certain treatment effects on the treated are identified \\
+   %     E.g., for individuals with treatment $d$, the effects of moving from $d$ to a specific $d^\prime$ identified
+      
+   %   \item[--] Solutions proposed:\\
+   %   (1) Shape restrictions + three periods $\rightarrow$ partial identification\\
+   % (2) Linear random coefficient model $\rightarrow$  identification of average treatment effects only
+   % \end{itemize}
+
+
+% \begin{frame}{This Paper}
+% \textbf{Setting}:
+% \vspace{0.1cm}
+%     \begin{itemize}
+%         \item 
+%     \end{itemize}
+% \vspace{0.5cm}
+% \textbf{Results} :  
+% \vspace{0.1cm}
+% \begin{itemize}
+
+% \item By restricting the dependence structure of unobservables, \\ we identify the counterfactual outcome distribution under different treatment levels
+        
+%     \end{itemize}
+   
+% \end{frame}
+
+
+\begin{frame}{Related Literature}
+   
+    \begin{itemize}
+        \item DiD with continuous treatment \\
+         \vspace{0.1cm}
+        Callaway, Goodman-Bacon, and Sant’Anna (2024, 2025); de Chaisemartin, D’Haultfœuille, Pasquier, Sow, and Vazquez-Bare (2022); de Chaisemartin, D’Haultfœuille, and Vazquez-Bare (2024)
+        
+        % \vspace{0.22cm}
+        % \textbf{This paper}: Treatment can be nonzero in both periods; Identify beyond the average effects
+
+    \vspace{0.25cm}
+     \item Panel data models with unrestricted heterogeneity\\
+         \vspace{0.1cm}
+         Chamberlain (1982); Graham and Powell (2012); Arellano and Bonhomme (2012); Chernozhukov, Fernández-Val, Hahn, and Newey (2013)
+        
+     \vspace{0.25cm}
+        \item \textbf{This paper}: identify the counterfactual outcome distribution under different treatment levels by restricting the dependence structure of unobservables
+        
+
+     %    \item IV with discrete support\\
+     %     \vspace{0.15cm}
+     %    D’Haultfoeuille and Février (2015); Torgovitsky (2015); Chernizhukov, Fernández-Val, and Luo (2025); Chernizhukov, Fernández-Val, Han, and Wüthrich (2024)\\
+     % \vspace{0.22cm}
+     %    \textbf{This paper}: Need time to provide exogenous variation in treatment,  and allow it to directly affect outcome. 
+     %  (Allow the exclusion restriction to be violated)
+        
+    \end{itemize}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Setup and Notation: Panel Data}
+
+\begin{itemize}
+     \item Unit are drawn from an infinite superpopulation and observed over two periods $t\in \{0,1\}$
+     \vspace{0.1cm}
+     \item Each unit can be an individual, firm, or geographical unit (county or region).   
+          \vspace{0.1cm}
+
+     \item Let $D_{it}\in\mathcal{D}$ denote a continuous treatments at period $t$, and $\mathbf{D}_i=(D_{i0},D_{i1})\in \mathcal{D}_{01}$
+    \\ 
+    % Let $S_i=\mathds{1}\{D_{i0}\neq D_{i1}\}$ be an indicator equal to 1 if the unit's treatment changes over two periods
+    \vspace{0.1cm}
+    \item Let $Y_{it}(\mathbf{d}_i)$ denote potential outcomes at period $t$ under treatment path $\mathbf{d}_i=(d_{i0},d_{i1})$ 
+    
+    Static effect: $Y_{it}(\mathbf{d}_i)=Y_{it}(d_{it})$, $\ \ \forall \mathbf{d}_i=(d_{i0},d_{i1})$ and $t\in \{0,1\}$
+    
+    Consistency: observed outcome satisfies $Y_{it}=Y_{it}(D_{it})$
+    \vspace{0.1cm}
+
+    \item Suppress the individual index $i$ for simplicity when there is no ambiguity
+
+\end{itemize}
+
+
+
+\end{frame}
+
+
+
+\begin{frame}{Parameter of Interest}
+     Interested in $F_{Y_{t}(d)}$ for $d\in\mathcal{D}$ and its functionals , e.g.,
+    
+    \vspace{0.3cm}
+
+\begin{itemize}
+    \item Average structural functions $ASF_{t}(d)\coloneqq\mathbb{E}[Y_{t}(d)]$\\ 
+    \vspace{0.2cm}
+
+    Average treatment effects $ATE_t(d,d^{\prime})\coloneqq ASF_{t}(d)-ASF_{t}(d^{\prime})$ for all $d,d^{\prime}\in\mathcal{D}$
+
+\vspace{0.2cm}
+\item Quantile structural functions: $QSF_{t}(d,\tau)\coloneqq Q_{Y_{t}(d)}(\tau)$\\
+\vspace{0.2cm}
+
+Quantile treatment effects: $QTE(\tau,d,d^{\prime})\coloneqq QSF_{t}(d,\tau)-QSF_{t}(d^{\prime},\tau)$ for all $d,d^{\prime}\in\mathcal{D}$
+\end{itemize} 
+
+\end{frame}
+
+
+
+% \begin{frame}{Framework}
+
+% \begin{block}{Assumption 0 (i.i.d. Sample)}
+% We observe $\{(Y_{i0},D_{i0},Y_{i1},D_{i1})\}_{i=1}^n$ that are independent and
+% identically distributed vectors with the same probability distribution as $(Y_0,D_0,Y_1,D_1)$
+    
+% \end{block}
+
+% \end{frame}
+
+
+
+
+\begin{frame}{Framework}
+    \begin{block}{Assumption 1 (Rank Invariance on the Time Trend)}\label{ass:rankinvariance}
+        $$Y_{it}(d)=g_{t}\big(\tilde{Y}_{it}(d)\big)$$ and $\tilde{Y}_{it}(d)\in\mathbb{R}$, and $y\mapsto g_{t}(y)$ is strictly increasing.
+    \end{block}
+    \vspace{0.6cm}
+\begin{itemize}
+    \item $\tilde{Y}_{it}(d)$: Detrended outcome \\
+    $\tilde{Y}_{it}(d)= h(d,U_{it})$ where $U_{it}$ is multidimensional unobserved heterogeneity, e.g., preference, ability
+    \item $g_t(y)$: Time effects/shocks, e.g., macro shocks \\ 
+    \vspace{0.1cm}
+    Time effect could be nonlinear, and it preserves the ranking of individuals in outcome distribution
+     % \item Athey and Imbens (2006): untreated potential outcome $Y_{t}(0)=g_{t}(U_{t})$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Framework}
+\begin{block}{Assumption 2 (Time Homogeneity)}\label{ass:stationary}
+  For all $d$ and $\mathbf{d}$,
+    $$\tilde{Y}_{i0}(d)\mid \mathbf{D}=\mathbf{d} \ \sim \  \tilde{Y}_{i1}(d)\mid \mathbf{D}=\mathbf{d} $$
+
+\end{block}
+\vspace{0.5cm}
+\begin{itemize}
+    \item Individuals with the same treatment path have the same distribution of $\tilde{Y}_{it}(d)$ across time
+    % \item Unobserved heterogeneity in the treatment equation is restricted to be one-dimensional
+    \item Suppose $\tilde{Y}_{it}(d)=h(d,U_{it})$,
+    \begin{itemize}\setlength{\leftskip}{-1.2em}
+        \item[--]  A2 is equivalent to $U_{i0}\mid \mathbf{D}_i=\mathbf{d} \ \sim \ U_{i1}\mid \mathbf{D}_i=\mathbf{d}$ 
+        \item[--] Sufficient condition: $U_{it}=A_i+V_{it}$ where $V_{i0}\mid A_i, \mathbf{D}_i=\mathbf{d} \sim V_{i1}\mid A_i, \mathbf{D}_i=\mathbf{d}$
+    \end{itemize}
+    % \item Athey and Imbens (2006): $U_{0}\mid D=d\sim U_{1}\mid D=d$ for $d\in\{0,1\}$
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Framework}
+\begin{block}{Assumption 3 (Support Condition)}
+   (i) There exists a positive measure of stayers, i.e., $0<\mathbb{P}(\Delta D_i=1)<1$ \\
+   (ii) There no stayers but “quasi stayers”, i.e., $\mathbb{P}(\Delta D_i=0)=0, \mathbb{P}(\Delta D_i\leq c)>0\ \forall c >0$ 
+\end{block}
+
+\begin{block}{Assumption 4 (Regularity)}
+    
+\end{block}
+    
+\end{frame}
+
+\begin{frame}{Identification: Time Trend $g_{t}(\cdot)$}
+    \begin{itemize}
+        \item Given the strict monotonicity, normalize $g_{1}(y)=y$ so that
+           $$Y_{0}(d)=g_{0}(\tilde{Y}_{0}(d))\qquad  Y_{1}(d)=\tilde{Y}_{1}(d)$$
+        % \begin{itemize}
+            % \item[-]
+        % Redefine $U_{t}(\cdot)$ as $g_{1}(U_{t}(\cdot))$ and $g_{t}(\cdot)$ as $g_{t}\left(g_{1}^{-1}(\cdot)\right)$ i.e.,
+        % $Y_{0}(d)=g_{0}(U_{0}(d))$, $Y_{1}(d)=U_{1}(d)$
+        % \end{itemize}        
+        % \vspace{0.2cm}
+        \item By using quasi-stayers, let $A_c = \{|\Delta D|< c \}$ where $\Delta D=D_1-D_0$  
+        $$g_{0}(\cdot)=\lim_{c\downarrow 0 } F_{Y_{0}\mid A_c}^{-1}\left(F_{Y_{1}\mid A_c}\big(\cdot \big)\right)$$ 
+        
+        \item Obtain the detrended outcome $\tilde{Y}_{t}=g_{t}^{-1}(Y_{t})$ and $\tilde{Y}_{t}(d)=g_{t}^{-1}(Y_{t}(d))$ 
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Assumption} \label{lemma:copula}
+
+\begin{block}{Lemma (Sklar, 1959)}
+ Given $t\in\{0,1\}$ and $d^\prime \in\mathcal{D}$, there exists a unique copula $C:[0,1]^2\to [0,1]$ such that
+$$F_{\tilde{Y}_t(d^\prime),D_t}(y,d)=C_{\tilde{Y}_t(d^\prime),D_t}\Big(\ F_{\tilde{Y}_t(d^\prime)}(y)\hspace{0.1em},\ F_{D_t}(d) \hspace{0.2em} \Big)\quad \text{ for all }y\in\mathcal{Y},d\in\mathcal{D}$$
+    
+\end{block}
+
+\begin{itemize}
+    \item  Copula function $C_{\tilde{Y}_t(d^\prime),D_t}\big(\cdot,\cdot\big)$ captures dependence structure between $\tilde{Y}_t(d^\prime)$ and $D_t$. \ \ \hyperlink{def:copula}{\beamergotobutton{}} 
+    \item Separate the marginal distributions from the (scale-free) dependence
+structure
+\end{itemize}
+\vspace{0.5cm}
+    \begin{block}{Assumption 5 (Stability of Gaussian Copula)} 
+    \begin{itemize}
+        \item[(i)] Dependence structure between $\tilde{Y}_t(d^\prime) $ and $D_t$ is stable over time, i.e., $C_{\tilde{Y}_0(d^\prime),D_0}\big(\cdot,\cdot\big)=C_{\tilde{Y}_1(d^\prime),D_1}\big(\cdot,\cdot\big)$
+    \item[(ii)] Dependence structure between $\tilde{Y}_t(d^\prime) $ and $D_t$ is Gaussian,
+    i.e., $C_{\tilde{Y}_t(d^\prime),D_t}\big(\cdot,\cdot\big)$ is a Gaussian copula
+    \end{itemize}
+    
+    \end{block}
+\end{frame}
+
+\begin{frame}{Local Gaussian Representation}
+\label{lemma:LGR}
+    \begin{block}{Lemma (Chernozhukov et al., 2025)}
+        Given $t\in\{0,1\}$ and $d^\prime\in\mathcal{D}$, the joint distribution $F_{\tilde{Y}_t(d^\prime),D_t}$ can be represented by a standard bivariate normal distribution at any point $(y,d)$ as
+        $$F_{\tilde{Y}_{t}(d^{*}),D_{t}}(y,d)=\Phi_2\Big( \ 
+        \ \Phi^{-1}\left(F_{\tilde{Y}_{t}(d^\prime)}(y) \right),\ \Phi^{-1}\Big( F_{D_t}(d)\Big) \ ;\ \ \textcolor{red}{\rho_{\tilde{Y}_{t}(d^\prime),D_{t}}(y,d)} \Big)$$ where $\Phi_2(\cdot,\cdot;\rho)$ is the standard bivariate normal CDF with parameter $\rho$, and $\textcolor{red}{\rho_{\tilde{Y}_{t}(d^\prime),D_{t}}(y,d)}\in[-1,1]$ is the local correlation parameter, whose value is unique.\ \  \hyperlink{def:LGR}{\beamergotobutton{}}
+    \end{block}
+    
+    \vspace{0.4cm}
+    % \pause
+    \begin{itemize}
+      \item $\Phi_2\Big(\Phi^{-1}(\cdot),\Phi^{-1}(\cdot),\rho\Big)$ captures the dependence structure of $\tilde{Y}_t(d^\prime)$ and $D_t$
+      \begin{itemize} \setlength{\leftskip}{-1em}
+    \item[-] It is called \textbf{Gaussian copula} if $\rho(y,d)=\rho$ for all $(y,d)$
+      \end{itemize}
+       \item $\rho(y,d)$ measure the local dependence of $\tilde{Y}_t(d^\prime)$ and $D_t$ at $(y,d)$
+       % \item $\rho(y,v)$ is positive $\iff$ Correlation of $\mathds{1}(\tilde{Y}_t(d)\leq y )$ and $\mathds{1}(V_t\leq v)$ is positive
+    \end{itemize}
+
+
+\end{frame}
+
+\begin{frame}{Discussion}
+    
+\end{frame}
+
+\begin{frame}{Local Gaussian Representation}
+
+\vspace{0.4cm}
+
+\begin{block}{Assumption 5 (Stability of Gaussian Copula)} Fix $d^\prime\in \mathcal{D}$, consider the dependence structure between $\tilde{Y}_t(d^\prime) $ and $D_t$,
+ \vspace{0.1cm}
+
+\begin{itemize}
+
+\item[(i)] Time-invariant dependence \\The copula between $\tilde{Y}_t(d^\prime) $ and $D_t$ is stable over time, i.e., $\rho_{\tilde{Y}_0(d^\prime),D_0}(y,d)=\rho_{\tilde{Y}_1(d^\prime),D_1}(y,d)$
+\vspace{0.2cm}
+    \item[(ii)] Gaussian dependence structure \\The copula between $\tilde{Y}_t(d^\prime) $ and $D_t$ is Gaussian,
+    i.e., $\rho_{\tilde{Y}_t(d^\prime),D_t}(y,d)$ does not depend on $(y,d)$
+    
+\end{itemize}
+     
+\end{block}
+
+\vspace{0.6cm}
+
+\begin{itemize}
+    \item $\rho_{d^\prime} $: dependence parameter between $\tilde{Y}_t(d^\prime) $ and $D_t$  
+    \item The restriction applies only to the dependence structure, not the marginals
+    \item Testable when more than two periods are available
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Discussion}
+    \begin{itemize}
+        \item 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+ \textbf{Random coefficient model}:
+ \begin{align*}
+     Y_{it}(d) & =g_t\Big(\alpha(\textcolor{blue}{\varepsilon_{it}}) +\beta(\textcolor{blue}{\varepsilon_{it}}) d\Big)\\
+D_{it}&=h_{t}(\textcolor{blue}{\eta_{it}})
+ \end{align*}
+where $g_t(\cdot) $ and $h_t(\cdot)$ are strictly increasing, the joint distribution of $(\textcolor{blue}{\varepsilon_{it}},\textcolor{blue}{\eta_{it}})$ is constant over time.
+\vspace{0.3cm}
+\begin{itemize}
+    \item Assumptions 1-5 hold with
+    \begin{align*}
+        U_t(d)&=\alpha(\varepsilon_{it}) +\beta(\varepsilon_{it}) d
+        % d^*_{\text{cross}}& =h_0( \eta^*)
+    \end{align*}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Identification}
+Let $V_{it}=F_{D_{it}}(D_{it})\in (0,1)$ be the rank of treatment $D_{it}$. Given $y$ and $d$,
+\vspace{0.2cm}
+\begin{itemize}
+    \item In period 0, observe
+    \begin{align*}
+       F_{D_0}(d)&=v_0 \\
+    F_{\tilde{Y}_0\mid D_0}(y\mid d)& = F_{\tilde{Y}_0(d)\mid V_0}(y\mid v_0)
+    \end{align*}
+ \item In period 1, observe   
+ \begin{align*}
+       F_{D_1}(d)&=v_1 \\
+    F_{\tilde{Y}_1\mid D_1}(y\mid d)& = F_{\tilde{Y}_1(d)\mid V_1}(y\mid v_1)
+    \end{align*}
+
+    \item To obtain $F_{\tilde{Y}_1(d)}(y)$, we need to extrapolate across rank $v\in(0,1)$
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Identification}
+Assumption 5 implies
+\begin{align*}
+    \Phi^{-1}\left(F_{\tilde{Y}_{0}\mid D_{0}}(y\mid d)\right)	&=a_{d,y}+b_{d,y}\Phi^{-1}\left(F_{D_{0}}(d)\right)\\
+\Phi^{-1}\left(F_{\tilde{Y}_{1}\mid D_{1}}(y\mid d)\right)	&=a_{d,y}+b_{d,y}\Phi^{-1}\left(F_{D_{1}}(d)\right)
+\end{align*}
+where 
+\begin{align*}
+    a_{d,y}	&=\frac{\Phi^{-1}\left(F_{\tilde{Y}_1(d)}(y)\right)}{\sqrt{1-\rho_{d}^{2}}}\\
+b_{d,y}	&=-\frac{\rho_{d}}{\sqrt{1-\rho_{d}^{2}}}
+\end{align*}
+
+\begin{block}{Proposition}
+    Under Assumption 1 -- 5, \ $F_{Y_{1}(d)}(y)$ and $\rho_{d}$ are identified for $y\in\mathcal{Y}$ and $d\in\mathcal{D}$.
+\end{block} 
+    
+\end{frame}
+
+
+
+
+
+
+% \begin{frame}{Example 1}
+%  \textbf{Linear model}:
+%  \begin{align*}
+%      Y_{it}(d) & =\alpha_{t}+\theta d+ \textcolor{blue}{\varepsilon_{it}}\\
+% D_{it} & =\gamma_{t}+\delta_{t}\textcolor{blue}{\eta_{it}}
+%  \end{align*}where $(\alpha_{t},\gamma_{t},\delta_{t}, \theta)$ are constants, the joint distribution of ($\textcolor{blue}{\varepsilon_{it}},\textcolor{blue}{\eta_{it}}$) is constant over time.\\
+% \vspace{0.3cm}
+% \begin{itemize}
+%     \item Assumptions 1-5 hold with 
+%     \begin{align*}
+%         U_{it}(d)&=\theta d +\varepsilon_{it}\\
+%          g_t(u)&=\alpha_t+u \\
+%          % d^*_{\text{cross}}&= \frac{\delta_1\gamma_0-\delta_0\gamma_1}{\delta_1-\delta_0}
+%     \end{align*}
+ 
+% \end{itemize}
+
+% \end{frame}
+
+
+
+
+
+
+\begin{frame}{Identification in Repeated Cross Sections}
+
+\begin{itemize}
+\item Observe two repeated cross sections $\{(Y_{i0},D_{i0})\}_{i=1}^n,\{Y_{i1},D_{i1})\}_{i=1}^n$ 
+       \vspace{0.15cm}
+
+    \item Stayers and quasi-stayers can not be identified
+       \vspace{0.15cm}
+       \item Under the model of DHS (2023), Assumption 5 (i) automatically hold.
+    
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+% \begin{frame}{Changes-in-Changes (AI, 2006)}
+% \begin{itemize}
+%     \item Untreated potential outcome: for $t\in\{0,1\}$, $$Y_{t}(0)=g_{t}(U_{t})$$ and $g_{t}(u)$ is strictly increasing in $u$.
+%     \item Time invariance within group: for $d\in\{0,1\}$, $$U_{0}\mid D=d\sim U_{1}\mid D=d$$
+
+%     \item Distribution of $Y_{1}(0)\mid D=1$ is identified
+% \end{itemize}
+
+% \end{frame}
+
+
+
+
+
+
+
+\begin{frame}{Identification in Repeated Cross Sections}
+\begin{block}{Assumption 6 (Stationarity of Unobservables)}\label{ass:stationary}
+  For all $(d,v)\in\mathcal{D}\times[0,1]$,
+    $$\tilde{Y}_{0}(d)\mid V_{0}=v \ \sim \  \tilde{Y}_{1}(d)\mid V_{1}=v$$
+where $V_t \coloneqq F_{D_t}(D_t)$ is the ranking of 
+\end{block}
+\vspace{0.5cm}
+\begin{itemize}
+    \item Individuals with the same treatment rank at two periods have the same distribution of $U_t(d)$
+    % \item Unobserved heterogeneity in the treatment equation is restricted to be one-dimensional
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Identification in Repeated Cross Sections}
+\begin{block}{Assumption 7 (Crossing Points)}\label{ass:cross}
+    There exists a $d^{*}$ s.t. $F_{D_{0}}(d^{*})=F_{D_{1}}(d^{*})\in(0,1)$
+\end{block}
+
+\vspace{0.4cm}
+\begin{overlayarea}{\textwidth}{4.3cm}  % <- FIXED SPACE
+\only<1>{
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.42\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Graph/cdf_cross1.png}
+
+    \end{subfigure}
+    \hspace{0.05\textwidth}
+  \begin{subfigure}{0.42\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Graph/cdf_cross2.png}
+    \end{subfigure}
+
+\end{figure}
+}
+
+\only<2>{
+\begin{itemize}
+    \item Exogenous change (e.g., a policy change) affects individuals' treatment in a heterogeneous way
+
+    % \item E.g., Earned Income Tax Credit (EITC) increases the tax credit for families with income [10k,23k] between 1987 and 1989.
+
+    \item Observations with treatment level $d^{*}$ serve as a control group
+    \item Directly testable in the data
+\end{itemize}
+}
+
+
+\end{overlayarea}
+    
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}{Identification in Repeated Cross Sections}
+
+Under Assumptions 1--3, we can identify 
+$$ ATT_1(d,\textcolor{blue}{q_{0}(d)}) \coloneqq\mathbb{E}[Y_{1}(\textcolor{blue}{q_{0}(d)})-Y_{1}(d)\mid D_{1}=d]$$ where $\textcolor{blue}{q_{0}(d)}=F_{D_0}^{-1}\big(F_{D_1}(d)\big)$ is the treatment level in period 0 that corresponds to the same rank as 
+$d$ in period 1. \  \ $ ATT_1(d,d^{\prime})$ for arbitrary $d^{\prime}$ is not identified.
+\vspace{0.2cm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.46\linewidth]{Graph/cdf_cross3.png}
+    \end{figure}
+
+    
+\end{frame}
+
+
+
+\begin{frame}{Identification in Repeated Cross Sections}
+    Under Assumption 1 and 2, for all $d\in\mathcal{D}$, 
+    $$F_{\tilde{Y}_{0}(d),V_{0}}(y,v)=F_{\tilde{Y}_{1}(d),V_{1}}(y,v)\quad\forall(y,v)\in\mathcal{Y}\times[0,1]$$ where $F_{\tilde{Y}_{t}(d),V_{t}}$ is the joint CDF of $\tilde{Y}_{t}(d)$ and $V_{t}=F_{D_t}(D_t)$ .
+ \vspace{1cm}
+
+\begin{itemize}
+    \item Joint distribution of $\tilde{Y}_{t}(d)$ and $V_{t}$ does not change over time.
+    \item Allow for arbitrary dependence between $\tilde{Y}_{t}(d)$ and $V_{t}$.
+    % \item  $\tilde{Y}_{0}(d)\sim\tilde{Y}_{1}(d)$, time can be seen as a valid IV since it does not directly affect $\tilde{Y}_{t}(d)$
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Identification}
+
+
+ For $t\in\{0,1\}$, consider 
+ $$ F_{\tilde{Y}_{t}\mid D_{t}}(y\mid d)=F_{\tilde{Y}_{t}(d)\mid D_{t}}(y\mid d)=F_{\tilde{Y}_{t}(d)\mid V_{t}}\big(y\mid F_{D_{t}}(d)\big)$$
+ 
+ By the properties of the conditional distribution 
+ \begin{align*}
+     F_{\tilde{Y}_{t}(d)\mid V_{t}}(y\mid v) =	&\frac{\frac{\partial}{\partial v}F_{\tilde{Y}_{t}(d),V_{t}}(y,v)}{\frac{\partial}{\partial v}F_{V_{t}}(v)}\\
+=&	C_{v}^{G}\left(F_{\tilde{Y}_{t}(d)}(y),v;\rho_{\tilde{Y}_{t}(d),V_{t}}(y,v)\right)\\
+	& + C_{\rho}^{G}\left(F_{\tilde{Y}_{t}(d)}(y),v;\rho_{\tilde{Y}_{t}(d),V_{t}}(y,v)\right)\frac{\partial}{\partial v}\rho_{\tilde{Y}_{t}(d),V_{t}}(y,v)
+ \end{align*}
+    
+\end{frame}
+
+
+
+
+\begin{frame}{Estimation}
+
+\begin{itemize}
+    \item Step 1: Estimate the crossing point $d^*$\\
+$$\widehat{d}^* = \arg \min_{d\in [\widehat{F}_{D_{0}}^{-1}(\underline{p}),\widehat{F}_{D_{1}}^{-1}(\bar{p}) ]} \Big| \widehat{F}_{D_{1}}(d)-\widehat{F}_{D_{0}}(d) \Big| $$
+    \item Step 2: Estimate the time trend $g_0$
+    $$\widehat{g}_{0}(y)=\widehat{F}_{Y_{0}\mid D_{0}}^{-1}\left[\widehat{F}_{Y_{1}\mid D_{1}}(y\mid \widehat{d}^*)\big|\widehat{d}^*\right]$$ where
+    $$\widehat{F}_{Y_{t}\mid D_{t}}(y\mid d)=\frac{\sum_{i=1}^{n}\mathds{1}\{Y_{it}\leq y\}K\left(\frac{d-D_{it}}{h_{n}}\right)}{\sum_{i=1}^{n}K\left(\frac{d-D_{it}}{h_{n}}\right)}$$ and $K(\cdot)$ a kernel function and $h_n$ is a bandwidth.\\
+\vspace{0.2cm}
+    Detrend in period 0:  $\tilde{Y}_0 = \widehat{g}_0^{-1}(Y_0)$
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Estimation}
+    \begin{itemize}
+        \item Step 3: Solve the linear system
+        \begin{align*}
+            \widehat{a}_{d,y}	&=\frac{\Phi^{-1}\left(\widehat{F}_{\tilde{Y}_{0}\mid D_{0}}(y\mid d)\right)\Phi^{-1}\left(\widehat{F}_{D_{1}}(d)\right)-\Phi^{-1}\left(\widehat{F}_{Y_{1}\mid D_{1}}(y\mid d)\right)\Phi^{-1}\left(\widehat{F}_{D_{0}}(d)\right)}{\Phi^{-1}\left(\widehat{F}_{D_{1}}(d)\right)-\Phi^{-1}\left(\widehat{F}_{D_{0}}(d)\right)}\\
+\widehat{b}_{d,y}	&=\frac{\Phi^{-1}\left(\widehat{F}_{Y_{1}\mid D_{1}}(y\mid d)\right)-\Phi^{-1}\left(\widehat{F}_{\tilde{Y}_{0}\mid D_{0}}(y\mid d)\right)}{\Phi^{-1}\left(\widehat{F}_{D_{1}}(d)\right)-\Phi^{-1}\left(\widehat{F}_{D_{0}}(d)\right)}
+        \end{align*}
+        and 
+        $$\widehat{F}_{Y_{1}(d)}(y)	=\Phi\left(\frac{\widehat{a}_{d,y}}{\sqrt{1+\widehat{b}_{d,y}^{2}}}\right)
+\quad\qquad \widehat{\rho}_{d}(y)	=\frac{-\widehat{b}_{d,y}}{\sqrt{1+\widehat{b}_{d,y}^{2}}}$$
+    \end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}{To Do List}
+      \begin{itemize}
+      \item Estimation and Inference
+        \item Empirical Application
+
+    \end{itemize}
+\end{frame}
+
+
+
+
+
+\section{Differences-in-Differences in the Presence of Mediators}
+\begin{frame}{Outline}
+    \tableofcontents[sectionstyle=show/shaded]
+\end{frame}
+
+
+
+
+\section{Anticipation Effects in Differences-in-Differences}
+\begin{frame}{Outline}
+    \tableofcontents[sectionstyle=show/shaded]
+\end{frame}
+
+
+% \subsection*{Motivation}
+% \subsection*{Setup}
+% \subsection*{Identification}
+% \subsection*{Examples}
+% \subsection*{Estimation}
+% \subsection*{Simulation}
+
+
+
+
+\appendix
+
+\section{Appendix}
+
+\begin{frame}{Definition of Copula} \label{def:copula}
+    \begin{block}{Definition (Nelsen, 2006)} A function $C:[0,1]^2 \to [0,1]$ is a two-dimensional copula if \\
+    (i) For all $u,u^\prime\in [0,1]$, and $v,v^\prime\in [0,1]$ such that $u\leq u^\prime$, and $v\leq v ^\prime$, we have 
+    $$ C(u^\prime,v^\prime) + C(u,v) \geq C(u^\prime,v) + C(u,v^\prime) $$
+    (ii) For all $u,v\in [0,1]$, $C(u,v)=C(0,v)=0$ and $C(1,v)=v,C(u,1)=u$
+    \end{block}
+    \vspace{0.6cm}
+    \hyperlink{lemma:copula}{\beamerreturnbutton}
+\end{frame}
+
+
+
+\begin{frame}{Local Gaussian Representation} \label{def:LGR}
+   The joint distribution $F_{X,Y}$ can be represented by a standard bivariate normal distribution at any point $(x,y)$ as
+        $$F_{X,Y}(x,y)=\Phi_2\Big( \ 
+        \ \Phi^{-1}\left(F_{X}(x) \right),\ \Phi^{-1}\Big( F_{Y}(y)\Big) \ ;\ \ \rho_{X,Y}(x,y)\Big)$$ where $\Phi_2(\cdot,\cdot;\rho)$ is the standard bivariate normal CDF with parameter $\rho$, and $\rho_{X,Y}(x,y)\in[-1,1]$ is the unique solution in $\rho$ to $$F_{X,Y}(x,y)=\Phi_2\Big( \ 
+        \ \Phi^{-1}\left(F_{X}(x) \right),\ \Phi^{-1}\Big( F_{Y}(y)\Big) \ ;\ \ \rho\Big)$$
+
+    \hyperlink{lemma:LGR}{\beamerreturnbutton}
+\end{frame}
+
+\end{document}
